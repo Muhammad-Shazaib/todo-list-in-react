@@ -8,7 +8,6 @@ import Alert from './Components/Alert.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
-    <List />
-    <Alert />
+
   </StrictMode>,
 )

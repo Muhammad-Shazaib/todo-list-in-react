@@ -13,7 +13,7 @@ const List = ({ items, removeItem, editItem }) => {
                 Edit
               </button>
               <button className="remove-btn" type="button" onClick={() => removeItem(id)}>
-                Remove
+                Delete
               </button>
             </div>
           </div>

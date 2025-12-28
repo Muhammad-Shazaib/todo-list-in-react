@@ -23,8 +23,46 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
-      showAlert(true, "danger", "please enter value");
+      showAlert(true, "danger", "please enter the value");
+    } else if (name && isEditing) {
+      setList(
+        list.map((item) => {
+          if (item.id === editID) {
+            return { ...item, title: name };
+          }
+          return item;
+        })
+      );
+      setName("");
+      setEditID(null);
+      setIsEditing(false);
+      showAlert(true, "success", "value updated");
+    } else {
+      showAlert(true, "success", "item added to the list");
+      const newItem = { id: new Date().getTime().toString(), title: name };
+      setList([...list, newItem]);
+      setName("");
     }
+  };
+
+  const showAlert = (show = false, type = "", msg = "") => {
+    setAlert({ show, type, msg });
+  };
+
+  const removeItem = (id) => {
+    showAlert(true, "danger", "Value Deleted");
+    setList(list.filter((item) => item.id !== id));
+  };
+
+  const editItem = (id) => {
+    const itemToEdit = list.find((item) => item.id === id);
+    setIsEditing(true);
+    setEditID(id);
+    setName(itemToEdit.title);
+  };
+  const clearList = (id) => {
+    showAlert(true, "danger", "Clear Data");
+    setList([]);
   };
 
   useEffect(() => {
